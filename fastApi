@@ -1,0 +1,82 @@
+# Path Parameters
+
+## What problem does this solve?
+
+Path parameters uniquely identify a resource in a REST API.
+
+Example:
+
+GET /users/{user_id}
+
+Instead of creating multiple endpoints for each user,
+the client provides the identifier.
+
+---
+
+## Why is this approach chosen?
+
+- RESTful API Design
+- Cleaner URLs
+- Easier Routing
+- Automatic Validation
+- Better OpenAPI Documentation
+
+---
+
+## Trade-offs
+
+- Route conflicts
+- Cannot be optional
+- Bad choice for filtering
+
+Example:
+
+/users/me
+/users/{user_id}
+
+Need careful route ordering.
+
+---
+
+## When should I avoid it?
+
+ Optional values
+
+ Search Filters
+
+ Sensitive Data
+
+Use Query Parameters instead.
+
+---
+
+## Real-world Example
+
+GET /bank/{bank_id}
+
+Returns bank Deposit details.
+
+GET /customer/{customer_id}
+
+Returns Customer Details.
+
+---
+
+## Interview Questions
+
+### Q1 Difference between Query and Path Parameters?
+
+-- when we need filtering ,data is optional then we should use query parameters 
+ when we need strict parameters,unique identification,better caching then we should you use path parameters
+
+### Q2 Can Path Parameters be optional?
+
+-- no path parameters cant be optional ,giving parameter is mandatory for identification
+
+---
+
+## Things I Learned
+
+- FastAPI automatically validates types.
+- OpenAPI docs are generated automatically.
+- Path parameters represent resources, not filters.
