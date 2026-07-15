@@ -1,0 +1,93 @@
+Git Quick Reference
+
+1. Check Status
+
+git status
+
+2. Fetch Latest Changes
+
+git fetch origin
+
+3. Pull Latest Changes
+
+git pull origin
+
+4. Push Changes
+
+git push origin
+
+5. Merge Target Branch
+
+git checkout git merge origin/develop
+
+6. Abort Merge
+
+git merge –abort
+
+7. Keep Your Current Changes (During Merge)
+
+Specific file: git checkout –ours git add
+
+All conflicted files: git checkout –ours . git add . git commit
+
+8. Keep Incoming Changes
+
+Specific file: git checkout –theirs git add
+
+All conflicted files: git checkout –theirs . git add . git commit
+
+9. List Conflicted Files
+
+git diff –name-only –diff-filter=U
+
+10. Cherry-pick a Commit
+
+git cherry-pick
+
+11. Cherry-pick a Merge Commit
+
+git cherry-pick -m 1
+
+12. Continue Cherry-pick
+
+git add . git cherry-pick –continue
+
+13. Abort Cherry-pick
+
+git cherry-pick –abort
+
+14. Rebase
+
+git rebase origin/develop
+
+15. Continue Rebase
+
+git add . git rebase –continue
+
+16. Abort Rebase
+
+git rebase –abort
+
+17. Stash Changes
+
+git stash git stash list git stash pop
+
+18. View Branches
+
+git branch git branch -a
+
+19. View Commit History
+
+git log –oneline –graph –decorate
+
+20. Recover Deleted Commits
+
+git reflog
+
+Notes: - During a merge: –ours = your current branch –theirs = branch
+being merged. - During a rebase: ours/theirs are reversed.
+
+ Tip: git fetch origin git checkout git merge origin/develop
+
+Resolve conflicts locally, then push your branch before creating or
+updating a PR.
