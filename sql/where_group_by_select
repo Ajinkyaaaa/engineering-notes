@@ -1,0 +1,138 @@
+Topic: SELECT, WHERE, GROUP BY
+1. What problem does this solve?
+Retrieves only the required data from a database instead of reading the entire dataset.
+Filters unnecessary records and groups related data to generate summaries and reports.
+Enables efficient querying for business analytics and application requirements.
+2. Why is this solution used?
+To fetch only relevant rows and columns.
+To reduce the amount of data transferred from the database.
+To perform aggregations such as totals, averages, counts, and maximum/minimum values.
+To improve readability by expressing complex data retrieval in a single SQL query.
+3. How does it work internally?
+
+Although we write queries as:
+
+SELECT ...
+FROM ...
+WHERE ...
+GROUP BY ...
+ORDER BY ...
+
+The SQL engine processes them in a logical execution order:
+
+FROM
+    ↓
+JOIN
+    ↓
+WHERE
+    ↓
+GROUP BY
+    ↓
+HAVING
+    ↓
+SELECT
+    ↓
+ORDER BY
+    ↓
+LIMIT
+FROM / JOIN
+The database identifies the source tables.
+Joins are executed to produce the intermediate result set.
+WHERE
+Every row is evaluated against the filtering condition.
+Rows evaluating to TRUE are retained.
+Rows evaluating to FALSE or UNKNOWN (NULL) are discarded.
+Filtering occurs before grouping, reducing the amount of data processed later.
+GROUP BY
+Remaining rows are partitioned into groups based on the specified columns.
+
+Aggregate functions such as:
+
+COUNT()
+SUM()
+AVG()
+MIN()
+MAX()
+
+are then calculated for each group.
+
+SELECT
+The required columns are projected from the grouped or filtered result.
+ORDER BY
+The final result is sorted.
+Sorting usually happens at the end because all rows must first be available.
+Internal Optimization
+
+The SQL optimizer may choose different execution strategies, such as:
+
+Sequential Scan
+Index Scan
+Bitmap Index Scan
+Hash Join
+Merge Join
+Nested Loop Join
+
+Even though SQL has a logical execution order, the optimizer may execute parts differently to improve performance while producing the same result.
+
+4. Trade-offs
+Advantages
+Easy to retrieve only relevant data.
+Reduces network traffic.
+Supports efficient reporting using aggregation.
+Improves readability.
+Disadvantages
+Incorrect filtering may return incomplete results.
+GROUP BY on large datasets can be expensive.
+Missing indexes may cause full table scans.
+Sorting (ORDER BY) on huge datasets can consume significant memory and CPU.
+5. Restrictions
+Aggregate functions cannot be used inside WHERE
+
+ Incorrect
+
+SELECT *
+FROM employees
+WHERE COUNT(*) > 5;
+
+Reason:
+
+WHERE executes before GROUP BY, so aggregate values do not exist yet.
+
+Use HAVING instead.
+
+SELECT department_id,
+       COUNT(*)
+FROM employees
+GROUP BY department_id
+HAVING COUNT(*) > 5;
+6. Real-world Example
+
+Imagine an e-commerce company wants to know:
+
+"How many orders has each customer placed?"
+
+SELECT customer_id,
+       COUNT(*) AS total_orders
+FROM orders
+WHERE order_date >= '2026-01-01'
+GROUP BY customer_id
+ORDER BY total_orders DESC;
+
+Execution:
+
+orders
+    ↓
+Filter orders after Jan 1
+    ↓
+Group by customer
+    ↓
+Count orders
+    ↓
+Sort by count
+7. Interview Questions
+What is the logical execution order of an SQL query?
+Why can't aggregate functions be used in WHERE?
+Difference between WHERE and HAVING?
+What happens internally during GROUP BY?
+How can indexes improve WHERE clause performance?
+Why is ORDER BY usually the most expensive operation?
