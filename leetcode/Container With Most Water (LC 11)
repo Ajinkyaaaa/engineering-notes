@@ -1,0 +1,7 @@
+link - http://leetcode.com/problems/container-with-most-water/submissions/2080554934/
+
+what troubled me to solve this question ?
+
+-- didnt take account for the min height of container shoud be used to calulate the area
+-- was confused about lenght of the logic   - it should be the distance between to heights
+
