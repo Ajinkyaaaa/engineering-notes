@@ -1,0 +1,21 @@
+--Standard template for example of decorator in interviews
+
+
+
+from functools import wraps
+
+
+def decorator(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+
+        # Extra behavior before
+
+        result = func(*args, **kwargs)
+
+        # Extra behavior after
+
+        return result
+
+    return wrapper
