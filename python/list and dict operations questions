@@ -105,3 +105,16 @@ roles = {"alice": "admin", "bob": "editor", "carol": "viewer"}
 print("'editor' exsists as values:", "editor" in roles.values())
 print("manager exsists as values:" ,"manager" in roles.values())
     
+
+
+
+
+
+
+
+# Q11 Write a Python program to calculate the total of all numerical values stored in a dictionary.
+
+expenses = {"rent": 1200, "food": 300, "transport": 150, "utilities": 200}
+
+sumValues = sum(expenses.values())
+print(sumValues)
