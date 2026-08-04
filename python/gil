@@ -1,0 +1,8 @@
+what is gil and its impact on multiprocessing and multithreading
+
+The Global Interpreter Lock (GIL) is a mutex in CPython that allows only one thread to execute Python bytecode at a time. 
+It exists mainly to protect CPython's reference-counting memory management and simplify thread safety. 
+As a result, Python threads cannot achieve true parallelism for CPU-bound tasks, 
+so multiprocessing is preferred because each process has its own interpreter and GIL.
+However, during blocking I/O operations, the GIL is released, allowing other threads to run, 
+which makes multithreading an excellent choice for I/O-bound applications such as web servers, API clients, and database operation.
